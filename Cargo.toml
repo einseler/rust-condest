@@ -12,13 +12,13 @@ categories = ["science"]
 keywords = ["condition", "linalg", "matrix", "ndarray", "norm"]
 
 [dependencies]
-cblas = "0.2"
-lapacke = "0.2"
-ndarray = "0.12"
-ordered-float = "1.0"
-rand = "0.6"
-rand_xoshiro = "0.1"
+cblas = "0.4.0"
+lapacke = "0.5.0"
+ndarray = "0.15.6"
+ordered-float = "3.3.0"
+rand = "0.8.5"
+rand_xoshiro = "0.6"
 
 [dev-dependencies]
-ndarray-rand = "0.9"
-openblas-src = "0.7"
+ndarray-rand = "0.14.0"
+openblas-src = "0.10.5"

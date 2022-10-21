@@ -232,7 +232,7 @@ impl Normest1 {
         // lessens the importance of counterexamples (see the comments in the next section).”
         {
             let rng_mut = &mut self.rng;
-            self.x_matrix.mapv_inplace(|_| sample[rng_mut.gen_range(0, sample.len())]);
+            self.x_matrix.mapv_inplace(|_| sample[rng_mut.gen_range(0..sample.len())]);
             self.x_matrix.column_mut(0).fill(1.);
         }
 
@@ -323,7 +323,7 @@ impl Normest1 {
                 let h = vector_maxnorm(&row);
                 max_h = if h > max_h { h } else { max_h };
                 // Convert f64 to NotNan for using sort_unstable_by below
-                *h_element = h.into();
+                *h_element = NotNan::new(h).unwrap();
             }
 
             // TODO: This test for equality needs an approximate equality test instead.
@@ -880,7 +880,7 @@ fn resample_column<R, S>(a: &mut ArrayBase<S, Ix2>, i: usize, rng: &mut R, sampl
 {
     assert!(i < a.dim().1, "Trying to resample column with index exceeding matrix dimensions");
     assert!(sample.len() > 0);
-    a.column_mut(i).mapv_inplace(|_| sample[rng.gen_range(0, sample.len())]);
+    a.column_mut(i).mapv_inplace(|_| sample[rng.gen_range(0..sample.len())]);
 }
 
 /// Returns slice and layout underlying an array `a`.
